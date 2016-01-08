@@ -1,0 +1,29 @@
+extends ../shared/layout
+
+block main-content
+  .row
+    form.col.s8.offset-s2(method="post")
+      .row
+        .input-field.col.s12
+          input#tb-first-name.validate(type="text", name="firstName")
+          label(for="tb-first-name") First Name
+      .row
+        .input-field.col.s12
+          input#tb-last-name.validate(type="text", name="lastName")
+          label(for="tb-last-name") Last Name
+      .row
+        .input-field.col.s12
+          input#tb-username.validate(type="text", name="username")
+          label(for="tb-username") Username
+      .row
+        .input-field.col.s12
+          input#tb-password.validate(type="password", name="password")
+          label(for="tb-password") Password
+      .row
+        .input-field.col.s12
+          input#tb-confirm-password.validate(type="password", name="confirmPassword")
+          label(for="tb-confirm-password") Confirm Password
+      .row
+        .input-field.col.s12
+          button.btn.waves-effect.waves-light.right(type="submit") Register
+            i.material-icons.right send
