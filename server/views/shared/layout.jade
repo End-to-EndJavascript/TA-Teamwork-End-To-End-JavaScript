@@ -2,20 +2,24 @@ doctype
 html
   head
     title End-To-End
-    link(rel="stylesheet", href="http://fonts.googleapis.com/icon?family=Material+Icons")
-    link(rel="stylesheet", href="lib/Materialize/dist/css/materialize.min.css")
-    link(rel="stylesheet", href="css/app.css")
+    include styles
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
     .container
       nav
         .nav-wrapper
-          a.brand-logo(href="/") Logo
+          a.brand-logo(href="/") Health Foody
           ul#nav-mobile.right.hide-on-med-and-down
-            li
-              a(href="/login") Login
-            li
-              a(href="/register") Register
+            if (currentUser)
+              li
+                a(href="/profile") #{currentUser.username}
+              li
+                a(href="/logout") Logout
+            else
+              li
+                a(href="/login") Login
+              li
+                a(href="/register") Register
       block main-content
       footer.page-footer
         .footer-copyright

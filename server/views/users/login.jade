@@ -1,0 +1,17 @@
+extends ../shared/layout
+
+block main-content
+  .row
+    form.col.s8.offset-s2(method="post")
+      .row
+        .input-field.col.s12
+          input#tb-username.validate(type="text", name="username")
+          label(for="tb-username") Username
+      .row
+        .input-field.col.s12
+          input#tb-password.validate(type="password", name="password")
+          label(for="tb-password") Password
+      .row
+        .input-field.col.s12
+          button.btn.waves-effect.waves-light.right(type="submit") Login
+            i.material-icons.right send
