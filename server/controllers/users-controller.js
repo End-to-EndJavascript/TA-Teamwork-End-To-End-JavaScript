@@ -1,12 +1,15 @@
 'use strict';
 
-var users = require('../data/users-data');
+var users = require('../data/users-data'),
+  encryption = require('../utilities/encryption');
+
+var CONTROLLER_NAME = 'users';
 
 module.exports = {
-  getRegister: function(req, res, next) {
-    res.render('users/register');
+  getRegister: function (req, res, next) {
+    res.render(CONTROLLER_NAME + '/register');
   },
-  postRegister: function(req, res, next) {
+  postRegister: function (req, res, next) {
     var user = req.body;
 
     if (user.password !== user.confirmPassword) {
@@ -14,11 +17,18 @@ module.exports = {
       res.redirect('/register');
     }
     else {
+      user.salt = encryption.generateSalt();
+      user.passHash = encryption.generateHashedPassword(user.salt, user.password);
+
       users
         .create(user)
-        .then(function(dbUser){
+        .then(function (dbUser) {
+          // TODO: login user?
           res.redirect('/');
         });
     }
+  },
+  getLogin: function (req, res, next) {
+    res.render(CONTROLLER_NAME + '/login');
   }
 };

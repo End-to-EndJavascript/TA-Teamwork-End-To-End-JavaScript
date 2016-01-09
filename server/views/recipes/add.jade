@@ -12,9 +12,12 @@ block main-content
           input#tb-image-url(type="text", name="imageUrl")
           label(for="tb-image-url") Image Url
       .row
-        .input-field.col.s12
-          input#tb-category(type="text", name="category")
-          label(for="tb-category") Category
+        .col.s12
+          label(for="select-category") Category
+          select.browser-default#select-category(name="category")
+            option(value="Dessert") Dessert
+            option(value="Soups") Soups
+            option(value="Drinks") Drinks
       .row
         .input-field.col.s12
           input#tb-ingredients.validate(type="text", name="ingredients")
