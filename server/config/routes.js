@@ -11,6 +11,8 @@ module.exports = function(app) {
   app.post('/login', auth.login);
   app.get('/logout', auth.isAuthenticated, auth.logout);
 
+  app.get('/profile', controllers.users.getProfile);
+
   app.get('/', function(req, res) {
     res.render('index');
   });

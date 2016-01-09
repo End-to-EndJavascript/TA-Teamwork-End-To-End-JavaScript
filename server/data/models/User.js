@@ -9,18 +9,16 @@ module.exports = (function () {
     lastName: {type: String, required: true},
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
+    description: {type: String, default: 'No description'},
     salt: {type: String, required: true},
     passHash: {type: String, require: true},
     isAdmin: {type: Boolean, default: false}
   });
 
   userSchema.method({
-    /*verifyPassword: function(password) {
-     return password === this.password;
-     },*/
     isAuthenticated: function (password) {
       console.log(encryption.generateHashedPassword(this.salt, password));
-      console.log(this.passHash); 
+      console.log(this.passHash);
       if (encryption.generateHashedPassword(this.salt, password) === this.passHash) {
         return true;
       }

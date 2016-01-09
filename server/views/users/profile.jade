@@ -1,0 +1,21 @@
+extends ../shared/layout
+
+block main-content
+  .row
+    .col.s6.offset-s3
+      .card.light-green.lighten-5
+        .card-image
+          img(src="http://joombig.com/demo-extensions1/images/gallery_slider/Swan_large.jpg")
+          span.card-title #{currentUser.firstName + ' ' + currentUser.lastName}
+        .card-content
+          p
+            span
+              strong Username:&nbsp;
+            span #{currentUser.username}
+          p
+            span
+              strong Description:&nbsp;
+            span #{currentUser.description}
+        .card-action
+          a.btn-floating.btn-large.waves-effect.waves-light.blue(href="/profile-edit")
+            i.material-icons mode_edit

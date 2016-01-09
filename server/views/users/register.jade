@@ -25,5 +25,9 @@ block main-content
           label(for="tb-confirm-password") Confirm Password
       .row
         .input-field.col.s12
+          textarea#tb-description.materialize-textarea.validate(type="text", name="description")
+          label(for="tb-description") Description
+      .row
+        .input-field.col.s12
           button.btn.waves-effect.waves-light.right(type="submit") Register
             i.material-icons.right send
