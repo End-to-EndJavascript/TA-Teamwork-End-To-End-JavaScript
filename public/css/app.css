@@ -1,0 +1,19 @@
+div.recipe-list-img {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}
+
+div.recipe-list-img:hover {
+    border: 1px solid #777;
+}
+
+div.recipe-list-img img {
+    width: 100%;
+    max-width: 150px;
+    height: 120px;
+}
+
+div.recipe-detail-img img {
+  width: 100%;
+  height: 100%;
+}

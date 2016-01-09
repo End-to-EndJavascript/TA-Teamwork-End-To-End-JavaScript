@@ -1,0 +1,29 @@
+extends ../shared/layout
+  
+block main-content
+  .row
+    form.col.s8.offset-s2(method="post")
+      .row
+        .input-field.col.s12
+          input#tb-recipe-name(type="text", name="name")
+          label(for="tb-recipe-name") Name
+      .row
+        .input-field.col.s12
+          input#tb-image-url(type="text", name="imageUrl")
+          label(for="tb-image-url") Image Url
+      .row
+        .input-field.col.s12
+          input#tb-category(type="text", name="category")
+          label(for="tb-category") Category
+      .row
+        .input-field.col.s12
+          input#tb-ingredients.validate(type="text", name="ingredients")
+          label(for="tb-ingredients") Ingredients
+      .row
+        .col.s12
+          label(for="ta-preparation") How To Prepare          
+          textarea#ta-preparation(name="howToPrepare")
+      .row
+        .input-field.col.s12
+          button.btn.waves-effect.waves-light.right(type="submit") Add
+            i.material-icons.right send

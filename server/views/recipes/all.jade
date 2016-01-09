@@ -1,0 +1,13 @@
+extends ../shared/layout
+  
+block main-content
+  div.container  
+    div.row  
+      each recipe in recipes
+        div.col.s3.recipe-list-img
+          a(href='/recipes/' + recipe.id)
+            img(src=recipe.imageUrl)
+            div.center-align
+              =recipe.name
+    div.row
+      a(href='/recipes/add') Add New Recipe          
