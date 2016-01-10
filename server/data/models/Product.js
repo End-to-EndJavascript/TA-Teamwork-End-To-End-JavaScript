@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-module.exports.init = function() {
+module.exports = (function() {
   var productSchema = mongoose.Schema({
     name: { type: String, required: true, unique: true, lowercase: true },
     category: { type: String, required: true, lowercase: true },
@@ -13,4 +13,4 @@ module.exports.init = function() {
   });
 
   mongoose.model('Product', productSchema);
-};
+}());
