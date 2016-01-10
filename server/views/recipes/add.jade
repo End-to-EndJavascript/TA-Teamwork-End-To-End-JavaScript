@@ -15,12 +15,15 @@ block main-content
         .col.s12
           label(for="select-category") Category
           select.browser-default#select-category(name="category")
-            option(value="Dessert") Dessert
-            option(value="Soups") Soups
-            option(value="Drinks") Drinks
+            option(value="snacks") Snacks
+            option(value="salads") Salads
+            option(value="soups") Soups
+            option(value="mainDishes") Main Dishes
+            option(value="desserts") Desserts
+            option(value="drinks") Drinks
       .row
         .input-field.col.s12
-          input#tb-ingredients.validate(type="text", name="ingredients")
+          input#tb-ingredients(type="text", name="ingredients")
           label(for="tb-ingredients") Ingredients
       .row
         .col.s12

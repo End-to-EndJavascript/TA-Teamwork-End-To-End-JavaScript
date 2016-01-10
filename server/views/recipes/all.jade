@@ -1,17 +1,20 @@
 extends ../shared/layout
   
 block main-content
+  -var categoryQuery = "&category=" + recipes.category
+  -var sortQuery = "&sortBy=" + recipes.sortBy
   div.container  
-    div.row
-      div.col.s12
-        a.dropdown-button.btn(data-activates="sort-dropdown") Order By      
+    div#search-bar.row
+      div.col.s6
+        a.dropdown-button.btn(data-activates="sort-dropdown") 
+          =(recipes.sortBy === "createdOn" ? "Date" : recipes.sortBy) || "Date"
         ul#sort-dropdown.dropdown-content
           li
-            a(href="recipes?sortBy=date") Date
+            a(href="recipes?sortBy=createdOn" + categoryQuery) Date
           li
-            a(href="recipes?sortBy=name") Name
+            a(href="recipes?sortBy=name" + categoryQuery) Name
           li
-            a(href="recipes?sortBy=calories") Calories
+            a(href="recipes?sortBy=calories" + categoryQuery) Calories
     div.row  
       each recipe in recipes.docs
         div.col.s3.recipe-list-img
@@ -30,11 +33,11 @@ block main-content
       -var nextPage = currentPage + 1
         ul.pagination.center-align
           li(class=(currentPage == 1 ? "hide" : ""))
-            a(href="recipes?page=" + prevPage + "&category=" + recipes.category)
+            a(href="recipes?page=" + prevPage + categoryQuery + sortQuery)
               i.material-icons chevron_left
           while page <= recipes.pages
             li.wave-effect(class=(page == recipes.page ? "active" : ""))
-              a(href="recipes?page=" + page + "&category=" + recipes.category)= page++
+              a(href="recipes?page=" + page + categoryQuery + sortQuery)= page++
           li(class=(currentPage == recipes.pages ? "hide" : ""))
-            a(href="recipes?page=" + nextPage + "&category=" + recipes.category)
+            a(href="recipes?page=" + nextPage + categoryQuery + sortQuery)
               i.material-icons chevron_right    

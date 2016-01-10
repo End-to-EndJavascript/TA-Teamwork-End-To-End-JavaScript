@@ -1,5 +1,5 @@
-div.recipe-list-img img:hover {
-  border: 1px solid #777;
+div#search-bar{
+  margin-top: 20px;
 }
 
 div.recipe-list-img img {
@@ -8,6 +8,10 @@ div.recipe-list-img img {
   max-width: 150px;
   height: 120px;
   border-radius: 5px;
+}
+
+div.recipe-list-img img:hover {
+  border: 1px solid #777;
 }
 
 div.recipe-detail-img img {
