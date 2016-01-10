@@ -6,12 +6,22 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
     .container
+      ul#recipes-dropdown.dropdown-content
+        li
+          a(href="/recipes") All Recipes
+        li
+          a(href="/recipes?category=Soups") Soups      
+        li
+          a(href="/recipes?category=Desserts") Desserts   
+        li
+          a(href="/recipes?category=Drinks") Drinks      
       nav
         .nav-wrapper
           a.brand-logo(href="/") Health Foody
           ul#nav-mobile.right.hide-on-med-and-down
-			li
-              a(href="/recipes") Recipes
+            li
+              a.dropdown-button(data-activates="recipes-dropdown") Recipes
+                i.material-icons.right arrow_drop_down
             if (currentUser)
               li
                 a(href="/profile") #{currentUser.username}

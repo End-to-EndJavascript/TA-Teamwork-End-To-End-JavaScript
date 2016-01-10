@@ -13,6 +13,7 @@ module.exports = {
 
         if (!dbRecipe) {
           reject('Recipe could not be saved in database!');
+          return;
         }
 
         resolve(dbRecipe);
@@ -21,9 +22,14 @@ module.exports = {
 
     return promise;
   },
-  getAll: function() {
+  getAll: function(page, category) {
     var promise = new Promise(function(resolve, reject) {
-      Recipe.find({}).exec(function(err, recipes) {
+      var query = {};
+      if (category) {
+        query = { category: category };
+      }
+
+      Recipe.paginate(query, { page: page || 1, limit: 1 }, function(err, recipes) {
         if (err) {
           reject('Failed to get all recipes: ' + err);
           return;
@@ -31,7 +37,10 @@ module.exports = {
 
         if (!recipes) {
           reject('No recipes found int DB: ' + err);
+          return;
         }
+
+        recipes.category = category || "";
 
         resolve(recipes);
       });

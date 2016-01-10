@@ -4,7 +4,7 @@ var recipes = require('../data/recipes-data');
 
 module.exports = {
   getAllRecipes: function(req, res, next) {
-    recipes.getAll()
+    recipes.getAll(req.query.page, req.query.category)
            .then(function (recipes) {
              res.render('recipes/all', { recipes });
            })

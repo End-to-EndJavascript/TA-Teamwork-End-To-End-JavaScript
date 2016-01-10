@@ -2,12 +2,39 @@ extends ../shared/layout
   
 block main-content
   div.container  
+    div.row
+      div.col.s12
+        a.dropdown-button.btn(data-activates="sort-dropdown") Order By      
+        ul#sort-dropdown.dropdown-content
+          li
+            a(href="recipes?sortBy=date") Date
+          li
+            a(href="recipes?sortBy=name") Name
+          li
+            a(href="recipes?sortBy=calories") Calories
     div.row  
-      each recipe in recipes
+      each recipe in recipes.docs
         div.col.s3.recipe-list-img
-          a(href='/recipes/' + recipe.id)
+          a(href="/recipes/" + recipe.id)
             img(src=recipe.imageUrl)
             div.center-align
               =recipe.name
     div.row
-      a(href='/recipes/add') Add New Recipe          
+      a(href="/recipes/add") Add New Recipe
+
+    div.row
+      div.col.s12
+      -var page = 1
+      -var currentPage = parseInt(recipes.page)
+      -var prevPage = currentPage - 1
+      -var nextPage = currentPage + 1
+        ul.pagination.center-align
+          li(class=(currentPage == 1 ? "hide" : ""))
+            a(href="recipes?page=" + prevPage + "&category=" + recipes.category)
+              i.material-icons chevron_left
+          while page <= recipes.pages
+            li.wave-effect(class=(page == recipes.page ? "active" : ""))
+              a(href="recipes?page=" + page + "&category=" + recipes.category)= page++
+          li(class=(currentPage == recipes.pages ? "hide" : ""))
+            a(href="recipes?page=" + nextPage + "&category=" + recipes.category)
+              i.material-icons chevron_right    
