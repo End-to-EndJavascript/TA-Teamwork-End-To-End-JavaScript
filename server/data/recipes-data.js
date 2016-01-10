@@ -55,7 +55,7 @@ module.exports = {
         sort = { createdOn: 'desc' }
       }
 
-      Recipe.paginate(query, { page: page || 1, limit: 12, sort: sort }, function(err, recipes) {
+      Recipe.paginate(query, { page: page || 1, limit: 8, sort: sort }, function(err, recipes) {
         if (err) {
           reject('Failed to get all recipes: ' + err);
           return;

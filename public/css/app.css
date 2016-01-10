@@ -1,3 +1,15 @@
+#height-recipes-all {
+  min-height: 350px;
+}
+
+#heigth-recipe-container {
+  min-height: 190px;
+}
+
+#height-recipe-details {
+  min-height: 500px;
+}
+
 div#search-bar{
   margin-top: 20px;
 }
