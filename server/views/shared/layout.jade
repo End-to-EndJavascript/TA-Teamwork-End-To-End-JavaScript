@@ -3,20 +3,42 @@ html
   head
     title End-To-End
     base(href="/")
-    link(rel="stylesheet", href="http://fonts.googleapis.com/icon?family=Material+Icons")
-    link(rel="stylesheet", href="lib/Materialize/dist/css/materialize.min.css")
-    link(rel="stylesheet", href="css/app.css")
+    include styles
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
     .container
+      ul#recipes-dropdown.dropdown-content
+        li
+          a(href="/recipes") All Recipes
+        li
+          a(href="/recipes?category=snacks") Snacks
+        li
+          a(href="/recipes?category=salads") Salads
+        li
+          a(href="/recipes?category=soups") Soups
+        li
+          a(href="/recipes?category=mainDishes")  Main Dishes
+        li
+          a(href="/recipes?category=desserts") Desserts
+        li
+          a(href="/recipes?category=drinks") Drinks
       nav
         .nav-wrapper
-          a.brand-logo(href="/") Logo
+          a.brand-logo(href="/") Health Foody
           ul#nav-mobile.right.hide-on-med-and-down
             li
-              a(href="/login") Login
-            li
-              a(href="/register") Register
+              a.dropdown-button(data-activates="recipes-dropdown") Recipes
+                i.material-icons.right arrow_drop_down
+            if (currentUser)
+              li
+                a(href="/profile") #{currentUser.username}
+              li
+                a(href="/logout") Logout
+            else
+              li
+                a(href="/login") Login
+              li
+                a(href="/register") Register
       block main-content
       footer.page-footer
         .footer-copyright

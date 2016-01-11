@@ -20,9 +20,7 @@ module.exports = {
           return next(err);
         }
 
-        res
-          .status(200)
-          .json({ username: user.username, message: 'Login successful'});
+        res.redirect('/');
       });
     });
 
@@ -30,15 +28,11 @@ module.exports = {
   },
   logout: function(req, res) {
     req.logout();
-    res
-      .status(200)
-      .json({ success: true });
+    res.redirect('/');
   },
-  authenticate: function(req, res, next) {
+  isAuthenticated: function(req, res, next) {
     if (!req.isAuthenticated()) {
-      res
-        .status(403)
-        .end();
+      res.redirect('/login');
     } else {
       next();
     }
