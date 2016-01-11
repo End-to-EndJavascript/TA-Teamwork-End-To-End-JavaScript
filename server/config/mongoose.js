@@ -19,4 +19,6 @@ module.exports = function(config) {
   });
 
   require('../data/models/User');
+  require('../data/models/Product');
+  require('../data/models/Recipe');
 };

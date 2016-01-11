@@ -8,9 +8,28 @@ html
   body(ng-app="foodApp")
     .container
       nav.light-green
+      ul#recipes-dropdown.dropdown-content
+        li
+          a(href="/recipes") All Recipes
+        li
+          a(href="/recipes?category=snacks") Snacks
+        li
+          a(href="/recipes?category=salads") Salads
+        li
+          a(href="/recipes?category=soups") Soups
+        li
+          a(href="/recipes?category=mainDishes")  Main Dishes
+        li
+          a(href="/recipes?category=desserts") Desserts
+        li
+          a(href="/recipes?category=drinks") Drinks
+      nav
         .nav-wrapper
           a.brand-logo(href="/") Health Foody
           ul#nav-mobile.right.hide-on-med-and-down
+            li
+              a.dropdown-button(data-activates="recipes-dropdown") Recipes
+                i.material-icons.right arrow_drop_down
             if (currentUser)
               li
                 a(href="/profile") #{currentUser.username}

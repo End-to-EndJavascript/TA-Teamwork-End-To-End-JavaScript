@@ -1,0 +1,24 @@
+extends ../shared/layout
+
+block main-content
+  div#height-recipe-details.container
+    h2.center-align
+      =recipe.name
+    div.row
+      div.col.s6.recipe-detail-img
+        img(src=recipe.imageUrl, alt="No Picture")
+      div.col.s6
+        h6 Calories = 
+          =recipe.calories
+        h6 Proteins = 
+          =recipe.proteins
+        h6 Carbohydrates = 
+          =recipe.carbohydrates
+        h6 Fats = 
+          =recipe.fats
+        hr
+        p Ingredients:
+        hr
+        p How To Prepare:
+          p
+            =recipe.howToPrepare
