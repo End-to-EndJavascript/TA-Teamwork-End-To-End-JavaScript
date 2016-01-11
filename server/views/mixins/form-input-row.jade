@@ -1,0 +1,5 @@
+mixin formInputRow(inputType, inputName, labelName)
+  .row
+    .input-field.col.s12
+      input.validate(id=inputName, type=inputType, name=inputName)
+      label(for=inputName)=inputName
