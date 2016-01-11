@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  return function breadcrumbs(req, res, next) {
+  return function(req, res, next) {
     var url = '';
 
     app.locals.breadcrumbs = req.url
