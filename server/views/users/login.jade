@@ -2,7 +2,7 @@ extends ../shared/layout
 
 block main-content
   .row
-    form.col.s8.offset-s2(method="post")
+    form.col.s8.offset-s2(action="/login" method="post")
       .row
         .input-field.col.s12
           input#tb-username.validate(type="text", name="username")

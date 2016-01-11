@@ -17,8 +17,6 @@ module.exports = (function () {
 
   userSchema.method({
     isAuthenticated: function (password) {
-      console.log(encryption.generateHashedPassword(this.salt, password));
-      console.log(this.passHash);
       if (encryption.generateHashedPassword(this.salt, password) === this.passHash) {
         return true;
       }

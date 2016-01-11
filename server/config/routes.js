@@ -13,6 +13,9 @@ module.exports = function(app) {
 
   app.get('/profile', controllers.users.getProfile);
 
+  app.get('/profile/edit', controllers.users.getEditProfile);
+  app.put('/profile/edit', controllers.users.updateProfile);
+
   app.get('/', function(req, res) {
     res.render('index');
   });

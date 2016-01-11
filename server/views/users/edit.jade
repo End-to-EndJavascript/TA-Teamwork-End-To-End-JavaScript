@@ -1,0 +1,32 @@
+extends ../shared/layout
+
+block main-content
+  .row(ng-controller="UsersController as vm")
+    form.col.s8.offset-s2()
+      .row
+        .input-field.col.s12
+          input#tb-first-name.validate(type="text", name="firstName" ng-model="request.firstName")
+          label(for="tb-first-name") First Name
+      .row
+        .input-field.col.s12
+          input#tb-last-name.validate(type="text", name="lastName" ng-model="request.lastName")
+          label(for="tb-last-name") Last Name
+      .row
+        .input-field.col.s12
+          input#tb-password.validate(type="password", name="password" ng-model="request.password")
+          label(for="tb-password") Password
+      .row
+        .input-field.col.s12
+          input#tb-confirm-password.validate(type="password", name="confirmPassword" ng-model="request.confirmPassword")
+          label(for="tb-confirm-password") Confirm Password
+      .row
+        .input-field.col.s12
+          textarea#tb-description.materialize-textarea.validate(type="text", name="description" ng-model="request.description")
+          label(for="tb-description") Description
+      .row
+        .input-field.col.s12
+          button.btn.waves-effect.waves-light.right(ng-click="vm.edit(request)") Update
+            i.material-icons.right send
+
+block page-scripts
+  //script(src="js/userEditor.js")

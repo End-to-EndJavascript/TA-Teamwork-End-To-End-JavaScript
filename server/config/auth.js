@@ -10,9 +10,8 @@ module.exports = {
       }
 
       if (!user) {
-        res
-          .status(400)
-          .json({ errorMessage: 'Incorrect username or password!' });
+        req.session.error = 'Username or password are invalid!';
+        res.redirect('/login');
       }
 
       req.login(user, function(err) {

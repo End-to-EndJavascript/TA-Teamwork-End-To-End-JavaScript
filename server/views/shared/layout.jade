@@ -2,9 +2,10 @@ doctype
 html
   head
     title End-To-End
+    base(href="/")
     include styles
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  body
+  body(ng-app="foodApp")
     .container
       nav.light-green
         .nav-wrapper
@@ -20,6 +21,11 @@ html
                 a(href="/login") Login
               li
                 a(href="/register") Register
+
+      .container
+        if (errorMessage)
+          .card-panel.red.lighten-3.center-align #{errorMessage}
+
       block main-content
       footer.page-footer.light-green
         .footer-copyright
