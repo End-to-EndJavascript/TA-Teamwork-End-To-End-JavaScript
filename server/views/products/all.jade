@@ -1,0 +1,28 @@
+extends ../shared/layout
+
+block main-content
+  .divider
+  .section
+    nav
+      .nav-wrapper
+        a.breadcrumb(href="/") Home
+        a.breadcrumb(href="/products") Products
+  table.centered.striped
+    thead
+      tr
+        th Name
+        th Proteins
+        th Carbohydrates
+        th Fats
+        th Calories
+    tbody
+      each product in products
+        tr
+          td= product.name
+          td= product.proteins
+          td= product.carbohydrates
+          td= product.fats
+          td= product.calories
+          td
+            button#edit.btn.waves-effect.waves-light Edit
+            button#edit.btn.waves-effect.waves-light.red Delete
