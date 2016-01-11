@@ -7,11 +7,11 @@ module.exports = {
     products
       .getAll()
       .then(function(dbProducts) {
-        res.render('products/all-products', { products: dbProducts });
+        res.render('products/all', { products: dbProducts });
       });
   },
   getAddProduct: function(req, res, next) {
-    res.render('products/add-product');
+    res.render('products/add');
   },
   postAddProduct: function(req, res, next) {
     var product = req.body;
