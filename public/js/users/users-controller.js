@@ -1,13 +1,15 @@
-(function () {
+(function() {
   'use strict';
 
-  function UsersController(data) {
+  angular
+    .module('foodApp.controllers')
+    .controller('UsersController', ['users', UsersController]);
+
+  function UsersController(users) {
     var vm = this;
 
-    vm.edit = function (request) {
-      data.put('profile/edit', request);
-    }
+    vm.edit = function(updatedUser) {
+      users.edit(updatedUser);
+    };
   }
-
-  angular.module('foodApp.controllers').controller('UsersController', ['data', UsersController]);
 }());

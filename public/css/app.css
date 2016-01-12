@@ -1,3 +1,14 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  margin-top: 20px;
+  flex: 1 0 auto;
+}
+
 #height-recipes-all {
   min-height: 350px;
 }
