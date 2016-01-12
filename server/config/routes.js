@@ -23,6 +23,10 @@ module.exports = function(app) {
   app.get('/profile/edit', controllers.users.getEditProfile);
   app.put('/profile/edit', controllers.users.updateProfile);
 
+  app.get('/admin/users', controllers.admin.getAdminAllUsersPage);
+  app.get('/admin/users/all', controllers.admin.getAllUsersInfo);
+  app.post('/admin/users/deleteUser', controllers.admin.deleteUser);
+
   app.get('/', function(req, res) {
     res.render('index');
   });

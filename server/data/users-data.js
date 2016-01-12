@@ -40,5 +40,31 @@ module.exports = {
     });
 
     return promise;
+  },
+  getAll: function () {
+    var promise = new Promise(function (resolve, reject) {
+      User.find({}, function (err, dbUsers) {
+        if (err) {
+          reject(err);
+        }
+
+        if (!dbUsers) {
+          reject('User could not be saved in database!');
+        }
+
+        resolve(dbUsers);
+      });
+    });
+
+    return promise;
+  },
+  deleteUser: function (id) {
+    var promise = new Promise(function (resolve, reject) {
+      User.find({_id: id}).remove().exec(function() {
+        resolve();
+      });
+    });
+
+    return promise;
   }
 };

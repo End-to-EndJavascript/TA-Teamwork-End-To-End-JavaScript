@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+
   angular.module('foodApp.services', []);
   angular.module('foodApp.controllers', ['foodApp.services']);
   angular.module('foodApp', ['ngRoute', 'foodApp.controllers'])

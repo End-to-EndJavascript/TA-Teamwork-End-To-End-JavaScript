@@ -2,11 +2,40 @@
   'use strict';
 
   function data($http, $q, baseServiceUrl) {
+    function get(url, data) {
+      var defered = $q.defer();
+
+      $http.get(baseServiceUrl + '/' + url)
+        .then(function (response) {
+          defered.resolve(response.data);
+        }, function (error) {
+          error = getErrorMessage(error);
+          defered.reject(error);
+        });
+
+      return defered.promise;
+    }
+
     function put(url, postData) {
       var defered = $q.defer();
 
       $http.put(baseServiceUrl + '/' + url, postData)
         .then(function (response) {
+          defered.resolve(response.data);
+        }, function (error) {
+          error = getErrorMessage(error);
+          defered.reject(error);
+        });
+
+      return defered.promise;
+    }
+
+    function deleteUser(url, data) {
+
+      var defered = $q.defer();
+      $http.post(baseServiceUrl + '/' + url, data)
+        .then(function (response) {
+
           defered.resolve(response.data);
         }, function (error) {
           error = getErrorMessage(error);
@@ -29,7 +58,9 @@
     }
 
     return {
-      put: put
+      get: get,
+      put: put,
+      deleteUser: deleteUser
     };
   }
 

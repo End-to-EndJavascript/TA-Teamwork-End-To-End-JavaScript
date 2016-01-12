@@ -2,7 +2,7 @@ extends ../shared/layout
   
 block main-content
   .row
-    form.col.s8.offset-s2(method="post")
+    form.col.s8.offset-s2(action="/recipes/add" method="post")
       .row
         .input-field.col.s12
           input#tb-recipe-name(type="text", name="name")
@@ -21,10 +21,20 @@ block main-content
             option(value="mainDishes") Main Dishes
             option(value="desserts") Desserts
             option(value="drinks") Drinks
+      div#add-ingredients-container.row
+        div#add-ingredient.col.s12
+          .col.s9
+            label(for="select-ingredient") Ingredients
+            select.browser-default#select-ingredient(name="ingredients")
+              each product in products
+                option(value=product._id) 
+                  =product.name
+          .input-field.col.s3
+            input#tb-quantity(type="text", name="quantity")
+            label(for="ta-quantity") Quantity  
       .row
-        .input-field.col.s12
-          input#tb-ingredients(type="text", name="ingredients")
-          label(for="tb-ingredients") Ingredients
+        .col.s12.center-align
+          a#btn-add-ingredient.btn.waves-effect.waves-light Add more ingredients                    
       .row
         .col.s12
           label(for="ta-preparation") How To Prepare          
