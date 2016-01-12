@@ -3,13 +3,17 @@
 
   angular
     .module('foodApp.controllers')
-    .controller('UsersController', ['users', UsersController]);
+    .controller('UsersController', ['$window', '$location', 'users', UsersController]);
 
-  function UsersController(users) {
+  function UsersController($window, $location, users) {
     var vm = this;
 
     vm.edit = function(updatedUser) {
-      users.edit(updatedUser);
+      users.edit(updatedUser)
+        .then(function (response) {
+          $location.path('/profile');
+          $window.location.reload();
+        });
     };
   }
 }());

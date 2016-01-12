@@ -1,0 +1,16 @@
+extends ../shared/layout
+
+block main-content
+  .row
+    form.col.s8.offset-s2(action="/profile/edit/avatar" method="post" enctype="multipart/form-data")
+      .row
+        .file-field.input-field.col.s12
+          .btn
+            span Image
+            input#tb-image(type="file" name="image" placeholder="Upload your image")
+          .file-path-wrapper
+            input.file-path.validate(type="text")
+      .row
+        .input-field.col.s12
+          button.btn.waves-effect.waves-light.right(type="submit") Update Image
+            i.material-icons.right send

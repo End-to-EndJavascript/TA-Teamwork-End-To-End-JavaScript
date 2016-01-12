@@ -10,6 +10,7 @@ module.exports = (function() {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     description: { type: String, default: 'No description' },
+    image: { type: String },
     salt: { type: String, required: true },
     passHash: { type: String, require: true },
     isAdmin: { type: Boolean, default: false }

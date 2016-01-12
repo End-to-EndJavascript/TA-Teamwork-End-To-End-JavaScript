@@ -5,7 +5,10 @@ block main-content
     .col.s6.offset-s3
       .card.light-green.lighten-5
         .card-image
-          img(src="http://joombig.com/demo-extensions1/images/gallery_slider/Swan_large.jpg")
+          if currentUser.image
+            img(src="#{currentUser.image}")
+          else
+            img(src="http://joombig.com/demo-extensions1/images/gallery_slider/Swan_large.jpg")
           span.card-title #{currentUser.firstName + ' ' + currentUser.lastName}
         .card-content
           p
@@ -17,5 +20,7 @@ block main-content
               strong Description:&nbsp;
             span #{currentUser.description}
         .card-action
-          a.btn-floating.btn-large.waves-effect.waves-light.blue(href="/profile/edit")
+          a.btn-floating.btn-large.waves-effect.waves-light.blue(href="/profile/edit" style="margin-right: 15px;")
             i.material-icons mode_edit
+          a.btn-floating.btn-large.waves-effect.waves-light.amber.lighten-1(href="/profile/edit/avatar")
+            i.material-icons picture_in_picture
