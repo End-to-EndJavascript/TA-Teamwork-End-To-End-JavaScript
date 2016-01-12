@@ -1,38 +1,40 @@
-(function () {
+(function() {
   'use strict';
 
+  angular
+    .module('foodApp.services')
+    .factory('data', ['$http', '$q', 'baseServiceUrl', data]);
+
   function data($http, $q, baseServiceUrl) {
-    function put(url, postData) {
+     function get(url) {
       var defered = $q.defer();
 
-      $http.put(baseServiceUrl + '/' + url, postData)
-        .then(function (response) {
+      $http.get(baseServiceUrl + url)
+        .then(function(response) {
           defered.resolve(response.data);
-        }, function (error) {
-          error = getErrorMessage(error);
+        }, function(error) {
           defered.reject(error);
         });
 
       return defered.promise;
     }
 
-    function getErrorMessage(response) {
-      var error = response.data.modelState;
-      if (error && error[Object.keys(error)[0]][0]) {
-        error = error[Object.keys(error)[0]][0];
-      }
-      else {
-        error = response.data.message;
-      }
+    function put(url, putData) {
+      var defered = $q.defer();
 
-      return error;
+      $http.put(baseServiceUrl + url, putData)
+        .then(function(response) {
+          defered.resolve(response.data);
+        }, function(error) {
+          defered.reject(error);
+        });
+
+      return defered.promise;
     }
 
     return {
+      get: get,
       put: put
     };
   }
-
-  angular.module('foodApp.services')
-    .factory('data', ['$http', '$q', 'baseServiceUrl', data]);
 }());

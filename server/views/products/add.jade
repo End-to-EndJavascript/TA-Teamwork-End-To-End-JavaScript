@@ -6,10 +6,10 @@ include ../mixins/form-button-row
 block main-content
   .row
     form.col.s8.offset-s2(method="post", action="/products/add")
-      + formInputRow('text', 'name')
-      + formInputRow('text', 'category')
-      + formInputRow('number', 'proteins')
-      + formInputRow('number', 'carbohydrates')
-      + formInputRow('number', 'fats')
-      + formInputRow('number', 'calories')
+      + formInputRow('text', 'name', 'Name')
+      + formInputRow('text', 'category', 'Category')
+      + formInputRow('number', 'proteins', 'Proteins')
+      + formInputRow('number', 'carbohydrates', 'Carbohydrates')
+      + formInputRow('number', 'fats', 'Fats')
+      + formInputRow('number', 'calories', 'Calories')
       + formButtonRow('Add Product', 'note_add')(type='submit')

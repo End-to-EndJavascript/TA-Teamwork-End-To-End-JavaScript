@@ -1,0 +1,22 @@
+include ../mixins/form-input-row
+
+#modal.modal(ng-controller="EditProductController as vm")
+  .modal-content
+    h5 Edit Product
+    .row
+      .col.s6
+        + formInputRow('text', 'name', 'Name')(ng-model="vm.product.name")
+      .col.s6
+        + formInputRow('text', 'category', 'Category')(ng-model="vm.product.category")
+    .row
+      .col.s6
+        + formInputRow('number', 'proteins', 'Proteins')(ng-model="vm.product.proteins")
+      .col.s6
+        + formInputRow('number', 'carbohydrates', 'Carbohydrates')(ng-model="vm.product.carbohydrates")
+    .row
+      .col.s6
+        + formInputRow('number', 'fats', 'Fats')(ng-model="vm.product.fats")
+      .col.s6
+        + formInputRow('number', 'calories', 'Calories')(ng-model="vm.product.calories")
+  .modal-footer
+    button.modal-action.modal-close.waves-effect.waves-green.btn-flat(ng-click="vm.edit(vm.product)") Agree

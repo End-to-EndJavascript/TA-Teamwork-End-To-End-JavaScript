@@ -38,37 +38,17 @@ module.exports = {
     return promise;
   },
   update: function(id, updatedProduct) {
-    // console.log(updatedProduct);
+    delete updatedProduct['__v'];
+    delete updatedProduct['_id'];
+
     var promise = new Promise(function(resolve, reject) {
-      Product.findByIdAndUpdate(id, updatedProduct, function(err, dbProduct) {
+      Product.findByIdAndUpdate(id, updatedProduct, { new: true }, function(err, dbProduct) {
         if (err) {
-          console.log(err);
-
           reject(err);
-
         }
-
-        console.log(dbProduct);
 
         resolve(dbProduct);
       });
-
-
-
-      // Product.findById(updatedProduct._id, function(err, dbProduct) {
-      //   if (err) {
-      //     reject(err);
-      //   }
-
-      //   dbProduct.name = 'pesho';
-      //   dbProduct.save(function(err) {
-      //     if (err) {
-      //       reject(err);
-      //     }
-
-      //     resolve(dbProduct);
-      //   });
-      // });
     });
 
     return promise;

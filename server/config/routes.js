@@ -13,6 +13,7 @@ module.exports = function(app) {
   app.get('/products', controllers.products.getAllProducts);
   app.get('/products/add', controllers.products.getAddProduct);
   app.post('/products/add', controllers.products.postAddProduct);
+  app.put('/products/:id', controllers.products.updateProduct);
   app.get('/recipes', controllers.recipes.getAllRecipes);
   app.get('/recipes/add', controllers.recipes.getAddNewRecipe);
   app.post('/recipes/add', controllers.recipes.postAddNewRecipe);

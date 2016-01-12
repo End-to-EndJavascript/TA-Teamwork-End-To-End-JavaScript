@@ -1,28 +1,30 @@
 extends ../shared/layout
 
+include ../mixins/form-input-row
+
 block main-content
-  .divider
-  .section
-    nav
-      .nav-wrapper
-        a.breadcrumb(href="/") Home
-        a.breadcrumb(href="/products") Products
-  table.centered.striped
-    thead
-      tr
-        th Name
-        th Proteins
-        th Carbohydrates
-        th Fats
-        th Calories
-    tbody
-      each product in products
+  .row(ng-controller="AllProductsController as vm")
+    table.centered.striped
+      thead
         tr
-          td= product.name
-          td= product.proteins
-          td= product.carbohydrates
-          td= product.fats
-          td= product.calories
+          th Name
+          th Proteins
+          th Carbohydrates
+          th Fats
+          th Calories
+      tbody
+        tr(ng-repeat="product in vm.products")
+          td {{ product.name }}
+          td {{ product.proteins }}
+          td {{ product.carbohydrates }}
+          td {{ product.fats }}
+          td {{ product.calories }}
           td
-            button#edit.btn.waves-effect.waves-light Edit
+            a.btn.waves-effect.waves-light(href="#modal", modal, ng-click="vm.broadcastEditEvent(product, $index)") Edit
             button#edit.btn.waves-effect.waves-light.red Delete
+    include edit
+
+block page-scripts
+  script(src="/js/products/products-service.js")
+  script(src="/js/products/all-products-controller.js")
+  script(src="/js/products/edit-product-controller.js")

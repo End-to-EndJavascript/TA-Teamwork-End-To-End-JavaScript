@@ -4,11 +4,15 @@ var products = require('../data/products-data');
 
 module.exports = {
   getAllProducts: function(req, res, next) {
-    products
-      .getAll()
-      .then(function(dbProducts) {
-        res.render('products/all', { products: dbProducts });
-      });
+    if (req.accepts('text/html')) {
+      res.render('products/all');
+    } else if(req.accepts('application/json')) {
+      products
+        .getAll()
+        .then(function(dbProducts) {
+          res.json(dbProducts);
+        });
+    }
   },
   getAddProduct: function(req, res, next) {
     res.render('products/add');
@@ -23,11 +27,8 @@ module.exports = {
       });
   },
   updateProduct: function(req, res, next) {
-    var updatedProduct = req.body.product;
-    var id = req.body.id;
-
     products
-      .update(id, updatedProduct)
+      .update(req.params.id, req.body)
       .then(function(dbProduct) {
         res.json(dbProduct);
       });
