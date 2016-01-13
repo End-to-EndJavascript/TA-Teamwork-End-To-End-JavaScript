@@ -33,7 +33,12 @@ module.exports = {
   },
   postAddNewRecipe: function(req, res, next) {
     var recipe = req.body;
-    
+
+    if (!recipe || !recipe.name || !recipe.howToPrepare) {
+      req.session.error = '"Name", "Category", "Ingredients" and "How to prepare" cannot be empty!';
+      res.redirect('/recipes/add');
+    }
+
     recipes.create(recipe)
            .then(function(dbRecipe) {
               res.redirect('/recipes');

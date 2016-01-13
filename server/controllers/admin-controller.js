@@ -17,7 +17,6 @@ module.exports = {
     users
       .deleteUser(req.body.userId)
       .then(function() {
-        res.end();
       })
   }
 }

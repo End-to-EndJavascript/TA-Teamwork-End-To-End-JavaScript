@@ -60,9 +60,15 @@ module.exports = {
   },
   deleteUser: function (id) {
     var promise = new Promise(function (resolve, reject) {
-      User.find({_id: id}).remove().exec(function() {
-        resolve();
-      });
+      User.findOne({_id: id}, function(err, userToDelete) {
+        if (err) {
+          reject(err);
+        }
+
+        userToDelete.remove(function(err) {
+          resolve(true);
+        })
+      })
     });
 
     return promise;

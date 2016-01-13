@@ -2,27 +2,36 @@ extends ../shared/layout
 
 block main-content
   div#height-recipe-details.container
-    h2.center-align
-      =recipe.name
     div.row
       div.col.s6.recipe-detail-img
         img(src=recipe.imageUrl, alt="No Picture")
       div.col.s6
-        h6 Calories = 
-          =recipe.calories
-        h6 Proteins = 
+        h2.center-align
+          =recipe.name
+    div.row.center
+      h5#recipe-details-header.left-align Nutritional values
+    div.row
+      div.col.s3.center
+        div Protein:  
           =recipe.proteins
-        h6 Carbohydrates = 
+      div.col.s3.center
+        div Carbs: 
           =recipe.carbohydrates
-        h6 Fats = 
+      div.col.s3.center
+        div Fat:  
           =recipe.fats
-        hr
-        div Ingredients:
-        -var num = 0
-          while num < recipe.ingredients.length
-            div.col.s9 #{recipe.ingredients[num].name}
-            div.col.s3 #{recipe.quantity[num++]}
-        hr
-        div How To Prepare:
-          div.col.s12
-            =recipe.howToPrepare
+      div.col.s3.center
+        div Calories:  
+          =recipe.calories
+    div.row.center
+      h5#recipe-details-header.left-align Ingredients
+    div.row
+      -var num = 0
+        while num < recipe.ingredients.length
+          div.col.s6.center #{recipe.ingredients[num].name}
+          div.col.s6.center #{recipe.quantity[num++]} grams
+    div.row
+      h5#recipe-details-header.left-align How to prepare:
+    div.row
+      div.col.s12.center
+        =recipe.howToPrepare

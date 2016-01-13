@@ -42,6 +42,11 @@ module.exports = {
             dbRecipe.fats += currentIngredient.fats * (res.quantity[i] / 100);
           };
 
+          dbRecipe.calories = dbRecipe.calories.toFixed(2);
+          dbRecipe.proteins = dbRecipe.proteins.toFixed(2);
+          dbRecipe.carbohydrates = dbRecipe.carbohydrates.toFixed(2);
+          dbRecipe.fats = dbRecipe.fats.toFixed(2);
+          
           Recipe.update({_id: dbRecipe._id}, dbRecipe, {upsert: true}, function(){});
         });
 

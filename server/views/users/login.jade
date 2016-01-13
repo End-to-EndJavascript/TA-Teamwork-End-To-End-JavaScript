@@ -6,6 +6,6 @@ include ../mixins/form-button-row
 block main-content
   .row
     form.col.s8.offset-s2(method="post" action="/login")
-      + formInputRow('text', 'username')
-      + formInputRow('password', 'password')
+      + formInputRow('text', 'username', "Username")
+      + formInputRow('password', 'password', "Password")
       + formButtonRow('Login', 'send')(type='submit')

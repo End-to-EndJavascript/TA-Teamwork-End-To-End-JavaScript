@@ -10,6 +10,14 @@ html
       nav.top-nav.light-green
         .nav-wrapper
           a.brand-logo(href="/") Health Foody
+          ul#logged-user-dropdown.dropdown-content
+            li
+              a(href="/profile") Profile
+            li
+              a(href="/logout") Logout
+            if (isAdmin)
+              li
+                a(href="/admin/users") Admin
           ul#recipes-dropdown.dropdown-content
             li
               a(href="/recipes") All Recipes
@@ -31,9 +39,8 @@ html
                 i.material-icons.right arrow_drop_down
             if (currentUser)
               li
-                a(href="/profile") #{currentUser.username}
-              li
-                a(href="/logout") Logout
+                a.dropdown-button(data-activates="logged-user-dropdown") #{currentUser.username}
+                  i.material-icons.right perm_identity
             else
               li
                 a(href="/login") Login
