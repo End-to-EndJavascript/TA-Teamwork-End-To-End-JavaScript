@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "nodemon server.js"
   },
   "author": "",
@@ -16,7 +16,6 @@
     "express-session": "~1.12.1",
     "jade": "~1.11.0",
     "mongoose": "~4.3.4",
-    "mongoose-paginate": "^5.0.0",
     "passport": "~0.3.2",
     "passport-local": "~1.0.0",
     "request": "^2.67.0"
