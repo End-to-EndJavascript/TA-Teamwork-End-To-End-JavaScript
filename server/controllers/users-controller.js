@@ -61,8 +61,8 @@ module.exports = {
         res.json(dbUser);
       })
       .catch(function (err) {
-          req.session.error = 'Could not update the profile!';
-          res.redirect('/profile/edit');
+        req.session.error = 'Could not update the profile!';
+        res.redirect('/profile/edit');
       });
     //}
   },
@@ -72,16 +72,18 @@ module.exports = {
   updateAvatar: function (req, res, next) {
     var updatedUser = {};
 
-    updatedUser.image = req.file.path.substr('public'.length);
+    if (req.file) {
+      updatedUser.image = req.file.path.substr('public'.length);
+    }
 
     users
       .update(req.user._id, updatedUser)
-        .then(function (dbUser) {
-          res.redirect('/profile');
-        })
-        .catch(function (err) {
-          req.session.error = 'Could not update the image!';
-          res.redirect('/profile/edit/avatar');
-        });
+      .then(function (dbUser) {
+        res.redirect('/profile');
+      })
+      .catch(function (err) {
+        req.session.error = 'Could not update the image!';
+        res.redirect('/profile/edit/avatar');
+      });
   }
 };

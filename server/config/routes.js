@@ -23,25 +23,25 @@ module.exports = function (app) {
 
   app.get('/products', controllers.products.getAllProducts);
   app.get('/products/add', auth.isAuthenticated, controllers.products.getAddProduct);
-  app.post('/products/add', controllers.products.postAddProduct);
+  app.post('/products/add', auth.isAuthenticated, controllers.products.postAddProduct);
   app.put('/products/:id', controllers.products.updateProduct);
 
   app.get('/recipes', controllers.recipes.getAllRecipes);
   app.get('/recipes/add', auth.isAuthenticated, controllers.recipes.getAddNewRecipe);
-  app.post('/recipes/add', controllers.recipes.postAddNewRecipe);
+  app.post('/recipes/add', auth.isAuthenticated, controllers.recipes.postAddNewRecipe);
   app.get('/recipes/:id', controllers.recipes.getRecipeDetails);
 
   app.get('/profile', auth.isAuthenticated, controllers.users.getProfile);
   app.get('/profile/edit', auth.isAuthenticated, controllers.users.getEditProfile);
   app.put('/profile/edit', auth.isAuthenticated, controllers.users.updateProfile);
   app.get('/profile/edit/avatar', auth.isAuthenticated, controllers.users.getEditAvatar);
-  app.post('/profile/edit/avatar', upload.single('image'), controllers.users.updateAvatar);
+  app.post('/profile/edit/avatar', auth.isAuthenticated, upload.single('image'), controllers.users.updateAvatar);
 
   app.get('/unauthorized', controllers.main.getUnauthorized);
 
-  app.get('/admin/users', controllers.admin.getAdminAllUsersPage);
-  app.get('/admin/users/all', controllers.admin.getAllUsersInfo);
-  app.post('/admin/users/deleteUser', controllers.admin.deleteUser);
+  app.get('/admin/users', auth.isAdmin, controllers.admin.getAdminAllUsersPage);
+  app.get('/admin/users/all', auth.isAdmin, controllers.admin.getAllUsersInfo);
+  app.post('/admin/users/deleteUser', auth.isAdmin, controllers.admin.deleteUser);
 
   app.get('/', function(req, res) {
     res.render('index');
