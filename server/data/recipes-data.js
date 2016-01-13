@@ -1,18 +1,16 @@
 'use strict';
 
-var request = require('request'),
-    fs = require('fs');
+var request = require('request');
+var fs = require('fs');
 var Recipe = require('mongoose').model('Recipe');
 
 module.exports = {
   create: function(recipe) {
     if (recipe.imageUrl) {
-      request(recipe.imageUrl).pipe(fs.createWriteStream('public/images/'+ recipe.name +'.jpg')).on('close', function() {
-      });
+      request(recipe.imageUrl).pipe(fs.createWriteStream('public/images/' + recipe.name + '.jpg')).on('close', function() {});
 
-      recipe.imageUrl = '/images/'+ recipe.name +'.jpg';
-    }
-    else {
+      recipe.imageUrl = '/images/' + recipe.name + '.jpg';
+    } else {
       recipe.imageUrl = '/images/default-image.jpg';
     }
 
@@ -34,56 +32,50 @@ module.exports = {
 
     return promise;
   },
-  getAll: function(page, category, sortBy) {
+  getAll: function(query) {
+    var take = 8;
+    var filter = {};
+    var page = query.page - 1;
+    var sortBy = query.sortBy;
+
+    if (query.category) {
+      filter.category = query.category;
+    }
+
     var promise = new Promise(function(resolve, reject) {
-      var query = {};
-      var sort = {};
+      Recipe
+        .find(filter)
+        .limit(take)
+        .skip(take * page)
+        .sort(sortBy)
+        .exec(function(err, recipes) {
+          if (err) {
+            reject('Failed to get all recipes: ' + err);
+          }
 
-      if (category) {
-        query = { category: category };
-      }
+          Recipe
+            .count(filter)
+            .exec(function(err, count) {
+              if (err) {
+                reject('Failed to get all recipes: ' + err);
+              }
 
-      if (sortBy) {
-        if (sortBy === 'name') {
-          sort[sortBy] = 'asc';
-        }
-        else {
-          sort[sortBy] = 'desc';
-        }
-      }
-      else {
-        sort = { createdOn: 'desc' }
-      }
-
-      Recipe.paginate(query, { page: page || 1, limit: 8, sort: sort }, function(err, recipes) {
-        if (err) {
-          reject('Failed to get all recipes: ' + err);
-          return;
-        }
-
-        if (!recipes) {
-          reject('No recipes found int DB: ' + err);
-          return;
-        }
-
-        recipes.category = category || "";
-        recipes.sortBy = sortBy || "";
-
-        resolve(recipes);
-      });
+              resolve({ recipes: recipes, pages: Math.round(count / take) });
+            });
+        });
     });
 
     return promise;
   },
   getById: function(id) {
     var promise = new Promise(function(resolve, reject) {
-      Recipe.findOne({_id: id}).exec(function(err, recipe) {
+      Recipe.findOne({ _id: id }).exec(function(err, recipe) {
         if (err) {
           reject('Failed to get recipe details: ' + err);
           return;
         }
 
-        if(!recipe){
+        if (!recipe) {
           reject('Recipe not found: ' + err);
         }
 
