@@ -22,7 +22,7 @@
     function post(url, data) {
 
       var defered = $q.defer();
-      $http.post(baseServiceUrl + '/' + url, data)
+      $http.post(baseServiceUrl + url, data)
         .then(function (response) {
 
           defered.resolve(response.data);
@@ -45,6 +45,18 @@
         });
 
       return defered.promise;
+    }
+
+    function getErrorMessage(response) {
+      var error = response.data.modelState;
+      if (error && error[Object.keys(error)[0]][0]) {
+        error = error[Object.keys(error)[0]][0];
+      }
+      else {
+        error = response.data.message;
+      }
+
+      return error;
     }
 
     return {
