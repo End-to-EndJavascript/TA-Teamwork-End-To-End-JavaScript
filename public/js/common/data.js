@@ -27,7 +27,6 @@
 
           defered.resolve(response.data);
         }, function (error) {
-          error = getErrorMessage(error);
           defered.reject(error);
         });
 
@@ -45,18 +44,6 @@
         });
 
       return defered.promise;
-    }
-
-    function getErrorMessage(response) {
-      var error = response.data.modelState;
-      if (error && error[Object.keys(error)[0]][0]) {
-        error = error[Object.keys(error)[0]][0];
-      }
-      else {
-        error = response.data.message;
-      }
-
-      return error;
     }
 
     return {
