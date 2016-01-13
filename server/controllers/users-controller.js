@@ -32,6 +32,10 @@ module.exports = {
         .then(function (dbUser) {
           // TODO: login user?
           res.redirect('/login');
+        })
+        .catch(function (err) {
+          req.session.error = 'Not all required fields are filled correctly!';
+          res.redirect('/register');
         });
     }
   },
