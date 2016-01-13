@@ -1,13 +1,15 @@
 extends ../shared/layout
-  
+
+include ../mixins/pagingnation
+
 block main-content
-  -var categoryQuery = "&category=" + recipes.category
-  -var sortQuery = "&sortBy=" + recipes.sortBy
-  div.container  
+  - var categoryQuery = category ? "&category=" + category : ''
+  - var sortQuery = "&sortBy=" + sortBy
+  div.container
     div#search-bar.row
       div.col.s3
-        a.dropdown-button.btn(data-activates="sort-dropdown") 
-          =(recipes.sortBy === "createdOn" ? "Date" : recipes.sortBy) || "Date"
+        a.dropdown-button.btn(data-activates="sort-dropdown")
+          =(sortBy === "createdOn" ? "Date" : sortBy) || "Date"
           i.material-icons.right arrow_drop_down
         ul#sort-dropdown.dropdown-content
           li
@@ -18,27 +20,12 @@ block main-content
             a(href="recipes?sortBy=calories" + categoryQuery) Calories
       div.col.s9.right-align
         a.btn(href="/recipes/add") Add New Recipe
-    div#height-recipes-all.row  
-      each recipe in recipes.docs
+    div#height-recipes-all.row
+      each recipe in recipes
         div#heigth-recipe-container.col.s3.recipe-list-img
           a(href="/recipes/" + recipe.id)
             img(src=recipe.imageUrl)
             div.center-align
               =recipe.name
-              
-    div.row
-      div.col.s12
-      -var page = 1
-      -var currentPage = parseInt(recipes.page)
-      -var prevPage = currentPage - 1
-      -var nextPage = currentPage + 1
-        ul.pagination.center-align
-          li(class=(currentPage == 1 ? "hide" : ""))
-            a(href="recipes?page=" + prevPage + categoryQuery + sortQuery)
-              i.material-icons chevron_left
-          while page <= recipes.pages
-            li.wave-effect(class=(page == recipes.page ? "active" : ""))
-              a(href="recipes?page=" + page + categoryQuery + sortQuery)= page++
-          li(class=(currentPage == recipes.pages ? "hide" : ""))
-            a(href="recipes?page=" + nextPage + categoryQuery + sortQuery)
-              i.material-icons chevron_right    
+    if pages > 1
+      + pagingnation('/recipes?page=', categoryQuery, sortQuery, page, pages)

@@ -9,6 +9,10 @@ main {
   flex: 1 0 auto;
 }
 
+.pagination li.active {
+  background-color: #26a69a;
+}
+
 #height-recipes-all {
   min-height: 350px;
 }

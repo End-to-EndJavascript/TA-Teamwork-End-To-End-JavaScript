@@ -1,0 +1,18 @@
+mixin pagingnation(url, categoryQuery, sortQuery, currentPage, pagesCount)
+  - var currentPage = parseInt(currentPage);
+  - var pagesCount = parseInt(pagesCount);
+  - var prevPage = currentPage - 1
+  - var nextPage = currentPage + 1
+
+  div.row.center
+    div.col.s12
+      ul.pagination
+        li.waves-effect(class= { disabled: currentPage === 1 })
+          a(href= (currentPage > 1 ? url + prevPage + categoryQuery + sortQuery : ''))
+            i.material-icons chevron_left
+        - for (var i = 1; i <= pagesCount; i++)
+            li.waves-effect(class= { active: currentPage === i })
+              a(href= url + i + categoryQuery + sortQuery)= i
+        li.waves-effect(class= { disabled: currentPage === pagesCount })
+          a(href= (currentPage < pagesCount ? url + nextPage + categoryQuery + sortQuery : ''))
+            i.material-icons chevron_right
