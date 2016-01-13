@@ -1,17 +1,20 @@
 'use strict';
 
+var url = require('url');
+
 module.exports = function(app) {
   return function(req, res, next) {
-    var url = '';
+    var pathname = url.parse(req.url).pathname;
+    var currUrl = '';
 
-    app.locals.breadcrumbs = req.url
+    app.locals.breadcrumbs = pathname
       .split('/')
       .filter(function(item) {
         return item !== '';
       })
       .map(function(item) {
-        url += '/' + item;
-        return { name: item, url: url };
+        currUrl += '/' + item;
+        return { name: item, url: currUrl };
       });
 
     next();
