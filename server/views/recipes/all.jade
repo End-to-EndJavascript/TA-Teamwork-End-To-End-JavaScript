@@ -5,6 +5,11 @@ include ../mixins/pagingnation
 block main-content
   - var categoryQuery = category ? "&category=" + category : ''
   - var sortQuery = "&sortBy=" + sortBy
+
+  h5= categoryQuer
+  h5= sortQuery
+  h5= page
+  h5= pages
   div.container
     div#search-bar.row
       div.col.s3
@@ -18,8 +23,9 @@ block main-content
             a(href="recipes?sortBy=name" + categoryQuery) Name
           li
             a(href="recipes?sortBy=calories" + categoryQuery) Calories
-      div.col.s9.right-align
-        a.btn(href="/recipes/add") Add New Recipe
+      if currentUser
+        div.col.s9.right-align
+          a.btn(href="/recipes/add") Add New Recipe
     div#height-recipes-all.row
       each recipe in recipes
         div#heigth-recipe-container.col.s3.recipe-list-img

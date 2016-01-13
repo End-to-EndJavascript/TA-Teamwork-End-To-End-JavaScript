@@ -18,7 +18,20 @@ block main-content
             option(value="mainDishes") Main Dishes
             option(value="desserts") Desserts
             option(value="drinks") Drinks
-      + formInputRow('text', 'ingredients', 'Ingredients')
+      div#add-ingredients-container.row
+        div#add-ingredient.col.s12
+          .col.s9
+            label(for="select-ingredient") Ingredients
+            select.browser-default#select-ingredient(name="ingredients")
+              each product in products
+                option(value=product._id)
+                  =product.name
+          .input-field.col.s3
+            input#tb-quantity(type="text", name="quantity")
+            label(for="ta-quantity") Quantity
+      .row
+        .col.s12.center-align
+          a#btn-add-ingredient.btn.waves-effect.waves-light Add more ingredients
       .row
         .col.s12
           label(for="ta-preparation") How To Prepare

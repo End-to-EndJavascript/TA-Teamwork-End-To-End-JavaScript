@@ -16,15 +16,37 @@ module.exports = {
 
     var promise = new Promise(function(resolve, reject) {
       Recipe.create(recipe, function(err, dbRecipe) {
+
         if (err) {
-          reject('Failed to create recipe: ' + err);
+          console.log('Failed to create recipe: ' + err);
           return;
         }
 
         if (!dbRecipe) {
-          reject('Recipe could not be saved in database!');
+          console.log('Recipe could not be saved in database!');
           return;
         }
+
+        Recipe.populate(dbRecipe, {
+          path: 'ingredients',
+          populate: { path: 'ingredients' }
+        }, function(err, res){
+          for (var i = 0; i < res.ingredients.length; i++) {
+            var currentIngredient = res.ingredients[i];
+
+            dbRecipe.calories += currentIngredient.calories * (res.quantity[i] / 100);
+            dbRecipe.proteins += currentIngredient.proteins * (res.quantity[i] / 100);
+            dbRecipe.carbohydrates += currentIngredient.carbohydrates * (res.quantity[i] / 100);
+            dbRecipe.fats += currentIngredient.fats * (res.quantity[i] / 100);
+          }
+
+          dbRecipe.calories = dbRecipe.calories.toFixed(2);
+          dbRecipe.proteins = dbRecipe.proteins.toFixed(2);
+          dbRecipe.carbohydrates = dbRecipe.carbohydrates.toFixed(2);
+          dbRecipe.fats = dbRecipe.fats.toFixed(2);
+
+          Recipe.update({_id: dbRecipe._id}, dbRecipe, {upsert: true}, function(){});
+        });
 
         resolve(dbRecipe);
       });
@@ -60,7 +82,7 @@ module.exports = {
                 reject('Failed to get all recipes: ' + err);
               }
 
-              resolve({ recipes: recipes, pages: Math.round(count / take) });
+              resolve({ recipes: recipes, pages: Math.ceil(count / take) });
             });
         });
     });
@@ -69,7 +91,10 @@ module.exports = {
   },
   getById: function(id) {
     var promise = new Promise(function(resolve, reject) {
-      Recipe.findOne({ _id: id }).exec(function(err, recipe) {
+      Recipe.findOne({_id: id}).populate({
+        path: 'ingredients',
+        populate: { path: 'ingredients' }
+      }).exec(function(err, recipe) {
         if (err) {
           reject('Failed to get recipe details: ' + err);
           return;

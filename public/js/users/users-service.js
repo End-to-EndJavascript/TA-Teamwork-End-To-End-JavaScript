@@ -6,10 +6,10 @@
     .factory('users', ['data', users]);
 
   function users(data) {
-    var url = 'users';
+    var url = 'profile/edit';
 
     function edit(updatedUser) {
-      data.put(url, updatedUser);
+      return data.put(url, updatedUser);
     }
 
     return {

@@ -2,7 +2,7 @@ extends ../shared/layout
 
 block main-content
   .row
-    form.col.s8.offset-s2(action="/register" method="post")
+    form.col.s8.offset-s2(action="/register" method="post" enctype="multipart/form-data")
       .row
         .input-field.col.s12
           input#tb-first-name.validate(type="text", name="firstName")
@@ -27,6 +27,13 @@ block main-content
         .input-field.col.s12
           textarea#tb-description.materialize-textarea.validate(type="text", name="description")
           label(for="tb-description") Description
+      .row
+        .file-field.input-field.col.s12
+          .btn
+            span Image
+            input#tb-image(type="file", name="image")
+          .file-path-wrapper
+            input.file-path.validate(type="text")
       .row
         .input-field.col.s12
           button.btn.waves-effect.waves-light.right(type="submit") Register

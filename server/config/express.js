@@ -1,14 +1,14 @@
 'use strict';
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var passport = require('passport');
+var express = require('express'),
+  bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),
+  session = require('express-session'),
+  passport = require('passport');
 
-var breadcrumbs = require('../middlewares/breadcrumps');
-var currentUser = require('../middlewares/current-user');
-var errorMessage = require('../middlewares/error-message');
+var breadcrumbs = require('../middlewares/breadcrumps'),
+  currentUser = require('../middlewares/current-user'),
+  errorMessage = require('../middlewares/error-message');
 
 module.exports = function(app, config) {
   app.set('view engine', 'jade');
