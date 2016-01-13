@@ -1,21 +1,15 @@
 extends ../shared/layout
 
-mixin inputRow(inputType, inputName, inputId, labelName)
-  .row
-    .input-field.col.s12
-      input.validate(id= inputId, type= inputType, name= inputName)
-      label(for=inputId)= labelName
+include ../mixins/form-input-row
+include ../mixins/form-button-row
 
 block main-content
   .row
-    form.col.s8.offset-s2(method="post", action="products/add")
-      + inputRow('text', 'name', 'tb-name', 'Product name')
-      + inputRow('text', 'category', 'tb-category', 'Category')
-      + inputRow('number', 'proteins', 'nb-proteins', 'Proteins')
-      + inputRow('number', 'carbohydrates', 'nb-carbohydrates', 'Carbohydrates')
-      + inputRow('number', 'fats', 'nb-fats', 'Fats')
-      + inputRow('number', 'calories', 'nb-calories', 'Calories')
-      .row
-        .input-field.col.s12
-          button.btn.waves-effect.waves-light.right(type="submit") Add Product
-            i.material-icons.right note_add
+    form.col.s8.offset-s2(method="post", action="/products/add")
+      + formInputRow('text', 'name', 'Name')
+      + formInputRow('text', 'category', 'Category')
+      + formInputRow('number', 'proteins', 'Proteins')
+      + formInputRow('number', 'carbohydrates', 'Carbohydrates')
+      + formInputRow('number', 'fats', 'Fats')
+      + formInputRow('number', 'calories', 'Calories')
+      + formButtonRow('Add Product', 'note_add')(type='submit')

@@ -13,11 +13,11 @@ module.exports = function() {
         }
 
         if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
+          return done(null, false);
         }
 
-        if (!user.isAuthenticated(password)) {
-          return done(null, false, { message: 'Incorrect password.' });
+        if (!user.verifyPassword(password)) {
+          return done(null, false);
         }
 
         return done(null, user);
@@ -26,17 +26,13 @@ module.exports = function() {
   ));
 
   passport.serializeUser(function(user, done) {
-    // return done(null, user.id);
     if (user) {
       return done(null, user._id);
     }
   });
 
   passport.deserializeUser(function(id, done) {
-/*    User.findById(id, function(err, user) {
-      done(err, user);
-    });*/
-    User.findOne({_id: id}).exec(function(err, user) {
+    User.findById(id, function(err, user) {
       if (err) {
         console.log('Error loading user: ' + err);
         return;
@@ -45,9 +41,8 @@ module.exports = function() {
       if (user) {
         return done(null, user);
       }
-      else {
-        return done(null, false);
-      }
-    })
+
+      return done(null, false);
+    });
   });
 };

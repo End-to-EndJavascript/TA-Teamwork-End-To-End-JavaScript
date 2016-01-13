@@ -11,7 +11,7 @@
         });
 
       vm.deleteUser = function (userId) {
-        data.deleteUser('admin/users/deleteUser', { userId })
+        data.post('admin/users/deleteUser', { userId })
             .then(function() {
               location.reload();
             });

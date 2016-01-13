@@ -1,13 +1,19 @@
-(function () {
+(function() {
   'use strict';
 
-  function UsersController(data) {
+  angular
+    .module('foodApp.controllers')
+    .controller('UsersController', ['$window', '$location', 'users', UsersController]);
+
+  function UsersController($window, $location, users) {
     var vm = this;
 
-    vm.edit = function (request) {
-      data.put('profile/edit', request);
-    }
+    vm.edit = function(updatedUser) {
+      users.edit(updatedUser)
+        .then(function (response) {
+          $location.path('/profile');
+          $window.location.reload();
+        });
+    };
   }
-
-  angular.module('foodApp.controllers').controller('UsersController', ['data', UsersController]);
 }());

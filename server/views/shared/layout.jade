@@ -6,26 +6,25 @@ html
     include styles
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body(ng-app="foodApp" ng-cloak)
-    .container
-      nav.light-green
-      ul#recipes-dropdown.dropdown-content
-        li
-          a(href="/recipes") All Recipes
-        li
-          a(href="/recipes?category=snacks") Snacks
-        li
-          a(href="/recipes?category=salads") Salads
-        li
-          a(href="/recipes?category=soups") Soups
-        li
-          a(href="/recipes?category=mainDishes")  Main Dishes
-        li
-          a(href="/recipes?category=desserts") Desserts
-        li
-          a(href="/recipes?category=drinks") Drinks
-      nav
+    header
+      nav.top-nav.light-green
         .nav-wrapper
           a.brand-logo(href="/") Health Foody
+          ul#recipes-dropdown.dropdown-content
+            li
+              a(href="/recipes") All Recipes
+            li
+              a(href="/recipes?category=snacks") Snacks
+            li
+              a(href="/recipes?category=salads") Salads
+            li
+              a(href="/recipes?category=soups") Soups
+            li
+              a(href="/recipes?category=mainDishes")  Main Dishes
+            li
+              a(href="/recipes?category=desserts") Desserts
+            li
+              a(href="/recipes?category=drinks") Drinks
           ul#nav-mobile.right.hide-on-med-and-down
             li
               a.dropdown-button(data-activates="recipes-dropdown") Recipes
@@ -40,15 +39,24 @@ html
                 a(href="/login") Login
               li
                 a(href="/register") Register
-
+    main
       .container
-        if (errorMessage)
-          .card-panel.red.lighten-3.center-align #{errorMessage}
+        .row
+           nav.light-green
+            .nav-wrapper
+              .col.s12
+                a.breadcrumb(href="/") home
+                each breadcrumb in breadcrumbs
+                  a.breadcrumb(href=breadcrumb.url)= breadcrumb.name
+        .row
+          if (errorMessage)
+            .card-panel.red.lighten-3.center-align #{errorMessage}
 
-      block main-content
-      footer.page-footer.light-green
-        .footer-copyright
-          .container
-            | &#169; 2014 Copyright Text
-            a.grey-text.text-lighten-4.right(href="#!") More Links
+        block main-content
+    footer.page-footer.light-green
+      .container
+        .row
+          .col.s12
+            a.grey-text.text-lighten-4(href="http://telerikacademy.com/") &#169; 2015 Telerik Academy
+            a.grey-text.text-lighten-4.right(href="https://github.com/End-to-EndJavascript/TA-Teamwork-End-To-End-JavaScript") Open source project
     include scripts

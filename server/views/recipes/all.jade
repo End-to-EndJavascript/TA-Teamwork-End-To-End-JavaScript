@@ -1,12 +1,12 @@
 extends ../shared/layout
-  
+
 block main-content
   -var categoryQuery = "&category=" + recipes.category
   -var sortQuery = "&sortBy=" + recipes.sortBy
-  div.container  
+  div.container
     div#search-bar.row
       div.col.s3
-        a.dropdown-button.btn(data-activates="sort-dropdown") 
+        a.dropdown-button.btn(data-activates="sort-dropdown")
           =(recipes.sortBy === "createdOn" ? "Date" : recipes.sortBy) || "Date"
           i.material-icons.right arrow_drop_down
         ul#sort-dropdown.dropdown-content
@@ -16,16 +16,17 @@ block main-content
             a(href="recipes?sortBy=name" + categoryQuery) Name
           li
             a(href="recipes?sortBy=calories" + categoryQuery) Calories
-      div.col.s9.right-align
-        a.btn(href="/recipes/add") Add New Recipe
-    div#height-recipes-all.row  
+      if currentUser
+        div.col.s9.right-align
+          a.btn(href="/recipes/add") Add New Recipe
+    div#height-recipes-all.row
       each recipe in recipes.docs
         div#heigth-recipe-container.col.s3.recipe-list-img
           a(href="/recipes/" + recipe.id)
             img(src=recipe.imageUrl)
             div.center-align
               =recipe.name
-              
+
     div.row
       div.col.s12
       -var page = 1
@@ -41,4 +42,4 @@ block main-content
               a(href="recipes?page=" + page + categoryQuery + sortQuery)= page++
           li(class=(currentPage == recipes.pages ? "hide" : ""))
             a(href="recipes?page=" + nextPage + categoryQuery + sortQuery)
-              i.material-icons chevron_right    
+              i.material-icons chevron_right
