@@ -1,7 +1,6 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var mongoosePaginate = require('mongoose-paginate');
 
 module.exports = (function() {
   var recipeSchema = mongoose.Schema({
@@ -16,8 +15,6 @@ module.exports = (function() {
     fats: { type: Number, default: 0 },
     ingredients: [] // Schema.Ingredients,
   });
-
-  recipeSchema.plugin(mongoosePaginate);
 
   mongoose.model('Recipe', recipeSchema);
 }());
