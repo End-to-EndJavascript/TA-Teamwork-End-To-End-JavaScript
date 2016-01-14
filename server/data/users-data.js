@@ -41,9 +41,10 @@ module.exports = {
 
     return promise;
   },
-  getAll: function () {
+  getAll: function (query) {
     var promise = new Promise(function (resolve, reject) {
-      User.find({}, function (err, dbUsers) {
+      console.log(query);
+      User.find({username: new RegExp(query)}, function (err, dbUsers) {
         if (err) {
           reject(err);
         }

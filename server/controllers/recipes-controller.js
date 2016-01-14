@@ -8,7 +8,7 @@ module.exports = {
     var query = {};
     query.page = req.query.page || 1;
     query.category = req.query.category;
-    query.sortBy = req.query.sortBy || 'asc';
+    query.sortBy = req.query.sortBy || 'createdOn';
 
     recipes
       .getAll(query)
@@ -28,7 +28,7 @@ module.exports = {
   getAddNewRecipe: function(req, res, next) {
     products.getAll()
             .then(function (products) {
-              // TODO: Change
+
               products.sort(function(a, b) {
                 if (a.category > b.category) {
                     return 1;

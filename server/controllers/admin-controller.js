@@ -3,20 +3,24 @@
 var users = require('../data/users-data');
 
 module.exports = {
-  getAdminAllUsersPage: function (req, res, next) {
-    res.render('administration/users');
-  },
-  getAllUsersInfo: function (req, res, next) {
-    users
-      .getAll()
-      .then(function(dbUsers) {
-        res.json(dbUsers);
-      });
+  getUsers: function (req, res, next) {
+    if (req.accepts('text/html')) {
+      res.render('administration/users');
+    } else if(req.accepts('application/json')) {
+      var searchQuery = req.query.search || "";
+
+      users
+        .getAll(searchQuery)
+        .then(function(dbUsers) {
+          res.json(dbUsers);
+        });
+    }
   },
   deleteUser: function (req, res, next) {
     users
       .deleteUser(req.body.userId)
       .then(function() {
+        res.redirect("/admin/users")
       })
   }
 }

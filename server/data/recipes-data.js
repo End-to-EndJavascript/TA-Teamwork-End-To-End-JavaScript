@@ -52,6 +52,10 @@ module.exports = {
       filter.category = query.category;
     }
 
+    if (sortBy == 'createdOn') {
+      sortBy = '-createdOn';
+    }
+
     var promise = new Promise(function(resolve, reject) {
       Recipe
         .find(filter)
