@@ -2,20 +2,11 @@
 
 var auth = require('./auth'),
   controllers = require('../controllers'),
-  multer = require('multer');
-
-var storage = multer.diskStorage({
-  destination: 'public/images/users',
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + req.body.username)
-  }
-});
-
-var upload = multer({storage: storage});
+  fileUpload = require('./file-upload');
 
 module.exports = function (app) {
   app.get('/register', controllers.users.getRegister);
-  app.post('/register', upload.single('image'), controllers.users.postRegister);
+  app.post('/register', fileUpload.userAvatar.single('image'), controllers.users.postRegister);
 
   app.get('/login', controllers.users.getLogin);
   app.post('/login', auth.login);
@@ -29,14 +20,14 @@ module.exports = function (app) {
 
   app.get('/recipes', controllers.recipes.getAllRecipes);
   app.get('/recipes/add', auth.isAuthenticated, controllers.recipes.getAddNewRecipe);
-  app.post('/recipes/add', auth.isAuthenticated, controllers.recipes.postAddNewRecipe);
+  app.post('/recipes/add', auth.isAuthenticated, fileUpload.recipeImage.single('image'), controllers.recipes.postAddNewRecipe);
   app.get('/recipes/:id', controllers.recipes.getRecipeDetails);
 
   app.get('/profile', auth.isAuthenticated, controllers.users.getProfile);
   app.get('/profile/edit', auth.isAuthenticated, controllers.users.getEditProfile);
   app.put('/profile/edit', auth.isAuthenticated, controllers.users.updateProfile);
   app.get('/profile/edit/avatar', auth.isAuthenticated, controllers.users.getEditAvatar);
-  app.post('/profile/edit/avatar', auth.isAuthenticated, upload.single('image'), controllers.users.updateAvatar);
+  app.post('/profile/edit/avatar', auth.isAuthenticated, fileUpload.userAvatar.single('image'), controllers.users.updateAvatar);
 
   app.get('/unauthorized', controllers.main.getUnauthorized);
 

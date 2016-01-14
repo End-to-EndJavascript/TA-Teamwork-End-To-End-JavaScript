@@ -5,9 +5,16 @@ include ../mixins/form-button-row
 
 block main-content
   .row
-    form.col.s8.offset-s2(method="post" action="recipes/add")
+    form.col.s8.offset-s2(method="post" action="recipes/add" enctype="multipart/form-data")
       + formInputRow('text', 'name', 'Name')
-      + formInputRow('text', 'imageUrl', 'Image Url')
+      .row
+        .file-field.input-field.col.s12
+          .btn
+            span Image
+            input#tb-image(type="file" name="image")
+          .file-path-wrapper
+            input.file-path.validate(type="text")
+      //- + formInputRow('text', 'imageUrl', 'Image Url')
       .row
         .col.s12
           label(for="select-category") Category

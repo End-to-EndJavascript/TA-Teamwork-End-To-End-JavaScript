@@ -1,30 +1,18 @@
 'use strict';
 
-var request = require('request');
-var fs = require('fs');
 var Recipe = require('mongoose').model('Recipe');
 
 module.exports = {
   create: function(recipe) {
-    if (recipe.imageUrl) {
-      request(recipe.imageUrl).pipe(fs.createWriteStream('public/images/' + recipe.name + '.jpg')).on('close', function() {});
-
-      recipe.imageUrl = '/images/' + recipe.name + '.jpg';
-    } else {
-      recipe.imageUrl = '/images/default-image.jpg';
-    }
-
     var promise = new Promise(function(resolve, reject) {
       Recipe.create(recipe, function(err, dbRecipe) {
 
         if (err) {
-          console.log('Failed to create recipe: ' + err);
-          return;
+          reject('Failed to create recipe: ' + err);
         }
 
         if (!dbRecipe) {
-          console.log('Recipe could not be saved in database!');
-          return;
+          reject('Recipe could not be saved in database!');
         }
 
         Recipe.populate(dbRecipe, {

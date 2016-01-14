@@ -43,6 +43,12 @@ module.exports = {
   postAddNewRecipe: function(req, res, next) {
     var recipe = req.body;
 
+    if (req.file) {
+      recipe.imageUrl = req.file.path.substr('public'.length);
+    } else {
+      recipe.imageUrl = '/images/recipes/default-recipe-image.jpg';
+    }
+
     if (!recipe || !recipe.name || !recipe.howToPrepare) {
       req.session.error = '"Name", "Category", "Ingredients" and "How to prepare" cannot be empty!';
       res.redirect('/recipes/add');
