@@ -4,10 +4,14 @@ include ../mixins/form-input-row
 
 block main-content
   .row(ng-controller="AllProductsController as vm")
+    if currentUser
+      div.right-align
+        a.btn(href="/products/add") Add New Product
     table.centered.striped
       thead
         tr
           th Name
+          th Category
           th Proteins
           th Carbohydrates
           th Fats
@@ -15,15 +19,17 @@ block main-content
       tbody
         tr(ng-repeat="product in vm.products")
           td {{ product.name }}
+          td {{ product.category }}
           td {{ product.proteins }}
           td {{ product.carbohydrates }}
           td {{ product.fats }}
           td {{ product.calories }}
-          td
-            a.btn-floating.btn-small.waves-effect.waves-light(href="#edit-modal", modal, ng-click="vm.broadcastEditEvent(product, $index)")
-              i.material-icons edit
-            a.btn-floating.btn-small.waves-effect.waves-light.red(href="#remove-modal", modal, ng-click="vm.setRemoveAction(product, $index)")
-              i.material-icons delete
+          if currentUser && currentUser.isAdmin
+            td
+              a.btn-floating.btn-small.waves-effect.waves-light(href="#edit-modal", modal, ng-click="vm.broadcastEditEvent(product, $index)")
+                i.material-icons edit
+              a.btn-floating.btn-small.waves-effect.waves-light.red(href="#remove-modal", modal, ng-click="vm.setRemoveAction(product, $index)")
+                i.material-icons delete
     include edit
     include remove
 
