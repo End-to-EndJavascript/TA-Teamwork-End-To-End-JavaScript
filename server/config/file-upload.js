@@ -7,7 +7,7 @@ var multer = require('multer'),
 var userAvatarStorage = multer.diskStorage({
   destination: 'public/images/users',
   filename: function(req, file, cb) {
-    var username = req.user.username || req.body.username;
+    var username = req.body.username || req.user.username;
 
     cb(null, username + '-' + file.fieldname + '-' + file.originalname);
   }
