@@ -13,6 +13,11 @@ main {
   background-color: #26a69a;
 }
 
+#remove-modal form {
+  width: 100%;
+  margin-left: 0;
+}
+
 #height-recipes-all {
   min-height: 350px;
 }

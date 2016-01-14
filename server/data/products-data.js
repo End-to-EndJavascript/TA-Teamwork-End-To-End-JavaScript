@@ -55,14 +55,12 @@ module.exports = {
   },
   remove: function(id) {
     var promise = new Promise(function(resolve, reject) {
-      Product.remove({
-        _id: id
-      }, function(err) {
+      Product.remove({ _id: id }, function(err) {
         if (err) {
           reject('Product could not be removed from database!');
         }
 
-        resolve();
+        resolve(true);
       });
     });
 

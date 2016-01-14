@@ -22,5 +22,18 @@
       vm.editProductIndex = index;
       $scope.$broadcast('init-product-edit', product);
     };
+
+    vm.setRemoveAction = function(product, index) {
+      vm.productToRemove = product;
+      vm.productToRemove.index = index;
+    };
+
+    vm.removeProduct = function(product) {
+      products
+        .remove(product._id)
+        .then(function() {
+          vm.products.splice(product.index, 1);
+        });
+    };
   }
 }());
