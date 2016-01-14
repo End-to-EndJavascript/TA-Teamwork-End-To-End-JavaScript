@@ -7,7 +7,15 @@ block main-content
   .row
     form.col.s8.offset-s2(method="post", action="/products/add")
       + formInputRow('text', 'name', 'Name')
-      + formInputRow('text', 'category', 'Category')
+      .row
+        .col.s12
+          label(for="select-category") Category
+          select.browser-default#select-category(name="category")
+            option(value="meat") Meat
+            option(value="vegetables") Vegetables
+            option(value="mushrooms") Mushrooms
+            option(value="spices") Spices
+            option(value="drinks") Drinks
       + formInputRow('number', 'proteins', 'Proteins')
       + formInputRow('number', 'carbohydrates', 'Carbohydrates')
       + formInputRow('number', 'fats', 'Fats')

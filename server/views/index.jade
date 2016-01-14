@@ -1,3 +1,15 @@
 extends shared/layout
+
 block main-content
-  h1 Home
+  .slider
+    ul.slides
+      li
+        img(src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fknowledgeoverflow.com%2Fwp-content%2Fuploads%2F2013%2F03%2Ffood_photography_burger_by_masterdev777-d3h1ryk.jpg&f=1")
+      li
+        img(src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2F2.bp.blogspot.com%2F-qJ59dC-eJXY%2FUP60HSObssI%2FAAAAAAAAARU%2FYQ87H_oVCfw%2Fs1600%2Fjapanesefood.jpg&f=1")
+      li
+        img(src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fhealthyfoodlocalearth.files.wordpress.com%2F2013%2F04%2Fvariety-of-colorful-vegetables-106968.jpg&f=1")
+block page-scripts
+  script(type='text/javascript').
+    $(function(){ $('.slider').slider({full_width: true}); });
+
