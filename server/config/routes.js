@@ -25,6 +25,7 @@ module.exports = function (app) {
   app.get('/products/add', auth.isAuthenticated, controllers.products.getAddProduct);
   app.post('/products/add', controllers.products.postAddProduct);
   app.put('/products/:id', controllers.products.updateProduct);
+  app.delete('/products/:id', controllers.products.removeProduct);
 
   app.get('/recipes', controllers.recipes.getAllRecipes);
   app.get('/recipes/add', auth.isAuthenticated, controllers.recipes.getAddNewRecipe);

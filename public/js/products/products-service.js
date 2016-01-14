@@ -16,9 +16,14 @@
       return data.put(url + '/' + updatedProduct._id, updatedProduct);
     }
 
+    function remove(id) {
+      return data.remove(url + '/' + id);
+    }
+
     return {
       getAll: getAll,
-      edit: edit
+      edit: edit,
+      remove: remove
     };
   }
 }());

@@ -6,7 +6,7 @@ module.exports = {
   getAllProducts: function(req, res, next) {
     if (req.accepts('text/html')) {
       res.render('products/all');
-    } else if(req.accepts('application/json')) {
+    } else if (req.accepts('application/json')) {
       products
         .getAll()
         .then(function(dbProducts) {
@@ -31,6 +31,13 @@ module.exports = {
       .update(req.params.id, req.body)
       .then(function(dbProduct) {
         res.json(dbProduct);
+      });
+  },
+  removeProduct: function(req, res, next) {
+    products
+      .remove(req.params.id)
+      .then(function() {
+        res.json(true);
       });
   }
 };

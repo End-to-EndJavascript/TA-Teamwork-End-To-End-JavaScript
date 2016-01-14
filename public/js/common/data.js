@@ -6,7 +6,7 @@
     .factory('data', ['$http', '$q', 'baseServiceUrl', data]);
 
   function data($http, $q, baseServiceUrl) {
-   function get(url) {
+    function get(url) {
       var defered = $q.defer();
 
       $http.get(baseServiceUrl + url)
@@ -23,10 +23,10 @@
 
       var defered = $q.defer();
       $http.post(baseServiceUrl + url, data)
-        .then(function (response) {
+        .then(function(response) {
 
           defered.resolve(response.data);
-        }, function (error) {
+        }, function(error) {
           defered.reject(error);
         });
 
@@ -46,10 +46,24 @@
       return defered.promise;
     }
 
+    function remove(url, data) {
+      var defered = $q.defer();
+
+      $http.delete(baseServiceUrl + url, data)
+        .then(function(response) {
+          defered.resolve(response.data);
+        }, function(error) {
+          defered.reject(error);
+        });
+
+      return defered.promise;
+    }
+
     return {
       get: get,
+      post: post,
       put: put,
-      post: post
+      remove: remove
     };
   }
 }());

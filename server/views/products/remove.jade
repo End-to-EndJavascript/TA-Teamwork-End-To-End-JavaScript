@@ -1,0 +1,7 @@
+#remove-modal.modal
+  .modal-content.center
+    i.material-icons.large.red-text warning
+    h5 Remove product: {{ vm.productToRemove.name }}
+  .modal-footer
+    button.modal-action.modal-close.waves-effect.waves-green.btn-flat(ng-click="vm.removeProduct(vm.productToRemove)") Agree
+
