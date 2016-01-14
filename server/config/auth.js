@@ -3,8 +3,8 @@
 var passport = require('passport');
 
 module.exports = {
-  login: function(req, res, next) {
-    var auth = passport.authenticate('local', function(err, user) {
+  login: function (req, res, next) {
+    var auth = passport.authenticate('local', function (err, user) {
       if (err) {
         return next(err);
       }
@@ -14,7 +14,7 @@ module.exports = {
         res.redirect('/login');
       }
 
-      req.login(user, function(err) {
+      req.login(user, function (err) {
         if (err) {
           return next(err);
         }
@@ -25,12 +25,19 @@ module.exports = {
 
     auth(req, res, next);
   },
-  logout: function(req, res) {
+  logout: function (req, res) {
     req.logout();
     res.redirect('/');
   },
-  isAuthenticated: function(req, res, next) {
+  isAuthenticated: function (req, res, next) {
     if (!req.isAuthenticated()) {
+      res.redirect('/unauthorized');
+    } else {
+      next();
+    }
+  },
+  isAdmin: function (req, res, next) {
+    if (!req.isAuthenticated() || (req.user && !req.user.isAdmin)) {
       res.redirect('/unauthorized');
     } else {
       next();
