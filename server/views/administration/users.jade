@@ -1,16 +1,23 @@
 extends ../shared/layout
 block main-content
   div(ng-controller="AdminUsersController as vm")
-    table.centered.highlight.bordered
-      thead
-        th(data-field="userName") Username
-        th(data-field="fullName") Full name
-        th(data-field="isAdmin") Is admin
-        th(data-field="options") Options
-      tbody
-          tr(ng-repeat="user in vm.users") 
-            td {{user.username}}
-            td {{user.firstName}} {{user.lastName}}
-            td {{user.isAdmin}}
-            td 
-              a.btn(ng-click="vm.deleteUser(user._id)") Delete
+    div.row
+      .col.s4
+        input(type="text", ng-model="params.search")
+      .col.s4
+        a.btn(ng-click="vm.getSortedUsers(params)")
+          i.material-icons search
+    div.row
+      table.centered.highlight.bordered
+        thead
+          th(data-field="userName") Username
+          th(data-field="fullName") Full name
+          th(data-field="isAdmin") Is admin
+          th(data-field="options") Options
+        tbody
+            tr(ng-repeat="user in vm.users") 
+              td {{user.username}}
+              td {{user.firstName}} {{user.lastName}}
+              td {{user.isAdmin}}
+              td 
+                a.btn(ng-click="vm.deleteUser(user._id)") Delete

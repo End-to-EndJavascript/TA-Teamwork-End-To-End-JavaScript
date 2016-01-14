@@ -4,16 +4,20 @@
   function AdminUsersController($location, data) {
       var vm = this;
 
-      data.get('admin/users/all')
-        .then(function(data) {
 
+      data.get('admin/users')
+          .then(function(data) {
           vm.users = data;
         });
 
       vm.deleteUser = function (userId) {
-        data.post('admin/users/deleteUser', { userId })
-            .then(function() {
-              location.reload();
+        data.post('admin/users/deleteUser', { userId });
+      }
+
+      vm.getSortedUsers = function (params) {
+        data.get('admin/users', params)
+            .then(function(data) {
+              vm.users = data;
             });
       }
 

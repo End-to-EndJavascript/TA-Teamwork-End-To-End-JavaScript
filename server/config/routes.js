@@ -39,8 +39,7 @@ module.exports = function (app) {
 
   app.get('/unauthorized', controllers.main.getUnauthorized);
 
-  app.get('/admin/users', auth.isAdmin, controllers.admin.getAdminAllUsersPage);
-  app.get('/admin/users/all', auth.isAdmin, controllers.admin.getAllUsersInfo);
+  app.get('/admin/users', auth.isAdmin, controllers.admin.getUsers);
   app.post('/admin/users/deleteUser', auth.isAdmin, controllers.admin.deleteUser);
 
   app.get('/', function(req, res) {

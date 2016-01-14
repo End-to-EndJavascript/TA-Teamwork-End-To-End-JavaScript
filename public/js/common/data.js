@@ -6,10 +6,14 @@
     .factory('data', ['$http', '$q', 'baseServiceUrl', data]);
 
   function data($http, $q, baseServiceUrl) {
-   function get(url) {
+   function get(url, params) {
       var defered = $q.defer();
 
-      $http.get(baseServiceUrl + url)
+      $http({
+        url: baseServiceUrl + url,
+        method: "GET",
+        params: params
+      })
         .then(function(response) {
           defered.resolve(response.data);
         }, function(error) {
