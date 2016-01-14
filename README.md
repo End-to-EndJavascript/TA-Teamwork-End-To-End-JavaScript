@@ -38,10 +38,6 @@ Health Foody is app for viewing and adding healthy and delicious recipes. User c
 * can be added to recipes
 * can be created only by admin
 
-`Post`
-* every `Town` has posts with different pictures
-* posts can have comments and can be rated(like, dislike)
-
 `Notification message`
 * when error occures when posting form
 
